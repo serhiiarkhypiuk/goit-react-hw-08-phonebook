@@ -1,5 +1,5 @@
 import styled from 'styled-components';
 
-export const StyledTitle = styled.h2`
+export const StyledLabel = styled.label`
   font-style: italic;
 `;
