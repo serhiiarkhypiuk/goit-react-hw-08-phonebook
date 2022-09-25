@@ -20,6 +20,7 @@ const Filter = () => {
         required={false}
         value={filter}
         autocomplete='off'
+        placeholder='Search contacts...'
       />
   )
 }

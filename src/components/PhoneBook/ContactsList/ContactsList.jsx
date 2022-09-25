@@ -19,8 +19,8 @@ const ContactsList = () => {
 
   return (
     <>
-    {filteredContacts.length === 0 ? (
-      <p>We can't find this contacts in your book!</p>
+    {filteredContacts.length === 0 && filter.length !== 0 ? (
+      <p>We can't find this contact in your book!</p>
     ) : (
       <StyledList>
         {filteredContacts.map(contact => (
