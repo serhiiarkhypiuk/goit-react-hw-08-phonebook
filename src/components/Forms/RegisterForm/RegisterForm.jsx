@@ -1,10 +1,23 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { authOperations } from 'redux/auth';
+import {StyledButton} from "../../atoms/Button/Button.styled";
+import {StyledInput} from "../../atoms/Input/Input.styled";
+import styled from "styled-components";
+
+export const StyledLabel = styled.label`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  &:not(:last-child){
+    margin-bottom: 10px;
+  }
+`
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,46 +35,56 @@ const RegisterForm = () => {
     }
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  const handleSubmit = event => {
+    event.preventDefault();
     dispatch(authOperations.register({ name, email, password }));
     setName('');
     setEmail('');
     setPassword('');
-    // navigate('/contacts', { replace: true });
   };
 
   return (
-    <form onSubmit={handleSubmit} autoComplete="off">
-      <label htmlFor="name">
-        Name
-        <input type="text" name="name" value={name} onChange={handleChange} />
-      </label>
+    <div style={{ width: '70%' }}>
+      <form
+        onSubmit={handleSubmit}
+        autoComplete="off"
+        style={{ display: 'flex', flexDirection: 'column', alignItems: 'inherit', justifyContent: 'center' }}
+      >
+        <StyledLabel htmlFor="name">
+          Name
+          <StyledInput
+            type="text"
+            name="name"
+            value={name}
+            onChange={handleChange}
+          />
+        </StyledLabel>
 
-      <label htmlFor="login">
-        Email
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleChange}
-        />
-      </label>
+        <StyledLabel htmlFor="login">
+          Email
+          <StyledInput
+            type="email"
+            name="email"
+            value={email}
+            onChange={handleChange}
+          />
+        </StyledLabel>
 
-      <label htmlFor="password">
-        Password
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handleChange}
-        />
-      </label>
+        <StyledLabel htmlFor="password">
+          Password
+          <StyledInput
+            type="password"
+            name="password"
+            value={password}
+            onChange={handleChange}
+          />
+        </StyledLabel>
 
-      <button type="submit">
-        Sign up
-      </button>
-    </form>
+        <StyledButton type="submit">
+          Sign up
+        </StyledButton>
+      </form>
+    </div>
   );
 };
 

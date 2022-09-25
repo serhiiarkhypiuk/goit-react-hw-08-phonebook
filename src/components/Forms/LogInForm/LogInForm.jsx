@@ -2,10 +2,23 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { authOperations } from 'redux/auth';
+import {StyledButton} from "../../atoms/Button/Button.styled";
+import {StyledInput} from "../../atoms/Input/Input.styled";
+import styled from 'styled-components';
+
+const StyledLabel = styled.label`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  &:not(:last-child){
+    margin-bottom: 10px;
+  }
+`;
 
 const LogInForm = () => {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -20,45 +33,47 @@ const LogInForm = () => {
     }
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  const handleSubmit = event => {
+    event.preventDefault();
     dispatch(authOperations.login({ email, password }));
     setEmail('');
     setPassword('');
-    // navigate('/contacts', { replace: true });
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit} autoComplete="off">
-        <label htmlFor="login">
+      <form
+        onSubmit={handleSubmit}
+        autoComplete="off"
+        style={{ display: 'flex', flexDirection: 'column', alignItems: 'inherit', justifyContent: 'center' }}>
+        <StyledLabel htmlFor="login">
           E-mail
-          <input
+          <StyledInput
             type="email"
             name="email"
             value={email}
             onChange={handleChange}
           />
-        </label>
+        </StyledLabel>
 
-        <label htmlFor="password">
+        <StyledLabel htmlFor="password">
           Password
-          <input
+          <StyledInput
             type="password"
             name="password"
             value={password}
             onChange={handleChange}
           />
-        </label>
-        <button type="submit">
+        </StyledLabel>
+        <StyledButton type="submit">
           Log In
-        </button>
+        </StyledButton>
       </form>
       <p>
         If you don`t have an account, please{' '}
         <Link to="/register">register</Link>!
       </p>
-    </div>
+  </div>
   );
 };
 

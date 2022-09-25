@@ -3,6 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { contactsOperations } from 'redux/contacts';
 import { closeModal } from 'redux/contacts/phoneBookSlice';
+import {
+  LabelModal,
+  Overlay,
+  Modal,
+} from './EditContactModal.styled';
+import Input from '../../atoms/Input/Input'
+import Button from "../../atoms/Button/Button";
 
 const modalRoot = document.querySelector('#modal-root');
 
@@ -38,40 +45,38 @@ const ContactEditModal = () => {
     dispatch(closeModal());
   };
 
+  const exitModal = () => dispatch(closeModal());
+
   return createPortal(
-    <div>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="">
+    <Overlay>
+      <Modal>
+        <form style={{ width: '400px', display: 'flex', flexDirection: 'column' }} onSubmit={handleSubmit}>
+          <LabelModal htmlFor="name">
             {' '}
             Name
-            <input
+            <Input
               type="text"
               name="name"
               value={name}
               onChange={handleChange}
             />
-          </label>
-          <label htmlFor="">
+          </LabelModal>
+          <LabelModal htmlFor="number">
             {' '}
             Number
-            <input
+            <Input
               type="text"
               name="number"
               value={number}
               onChange={handleChange}
             />
-          </label>
-          <button type="submit" onClick={handleSubmit}>
-            Save edit contact
-          </button>
-          <button type="submit" onClick={() => dispatch(closeModal())}>
-            Exit
-          </button>
+          </LabelModal>
+          <Button type="submit" onClick={handleSubmit} btnText='Save edit contact' />
+          <Button type="submit" onClick={() => exitModal} btnText='Exit' />
         </form>
-      </div>
-    </div>,
-    modalRoot,
+      </Modal>
+    </Overlay>,
+    modalRoot
   );
 };
 

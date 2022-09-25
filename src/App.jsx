@@ -4,18 +4,21 @@ import {Provider, useDispatch} from 'react-redux';
 import { Suspense } from 'react';
 import AppBar from './components/AppBar/AppBar';
 import HomePage from './pages/HomePage/HomePage';
-import LogInPage from './pages/LogInPage/LogInPage';
+// import UserPage from './pages/UserPage/UserPage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
 import ContactsPage from './pages/ContactsPage/ContactsPage';
 import { authOperations } from 'redux/auth';
 import PrivateRoute from './components/Routes/PrivateRoutes';
 import PublicRoute from './components/Routes/PublicRoutes';
 import { store } from './redux/store';
+import {StyledWrapper} from "./components/PhoneBook/AddContactForm/AddContactForm.styled";
 
 const AppWrapper = () => {
   return (
     <Provider store={store}>
-      <App />
+      <StyledWrapper>
+        <App />
+      </StyledWrapper>
     </Provider>
   )
 }
@@ -37,7 +40,7 @@ const App = () => {
             path="logIn"
             element={
               <PublicRoute redirectPath="/contacts" restricted>
-                <LogInPage/>
+                <HomePage/>
               </PublicRoute>
             }
             />

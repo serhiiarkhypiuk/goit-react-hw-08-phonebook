@@ -1,14 +1,28 @@
 import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
+
+const StyledNavLInk = styled(NavLink)`
+  border-radius: 15px;
+  margin-top: 0.5rem;
+  border: 3px solid white;
+  background-color: rgba(201, 240, 273, 0.7);
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px 3rem;
+  &:first-child {
+    margin-right: 10px;
+  }
+`;
 
 const Navigation = () => {
   return (
     <nav>
-      <ul>
+      <ul style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
         <li>
-          <NavLink to="/">Home</NavLink>
+          <StyledNavLInk to="/">Home</StyledNavLInk>
         </li>
         <li>
-          <NavLink to="/contacts">Contacts</NavLink>
+          <StyledNavLInk to="/contacts">Contacts</StyledNavLInk>
         </li>
       </ul>
     </nav>

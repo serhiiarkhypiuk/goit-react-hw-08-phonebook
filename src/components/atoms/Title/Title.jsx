@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { StyledLabel } from './Title.styled';
 
 const Title = ({ headerTitle }) => {
-  return <StyledLabel htmlFor={headerTitle}/>;
+  return <StyledLabel htmlFor={headerTitle}>{headerTitle}</StyledLabel>;
 };
 
 Title.propTypes = {

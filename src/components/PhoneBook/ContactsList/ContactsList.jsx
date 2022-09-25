@@ -14,21 +14,30 @@ const ContactsList = () => {
     contact.name.toLowerCase().includes(filter.toLowerCase()),
   );
 
+  const editModal = (id) => dispatch(openModal(id));
+  const deleteContact = (id) => dispatch(contactsOperations.deleteContact(id));
+
   return (
     <>
-    {filteredContacts.length ? (
+    {filteredContacts.length === 0 ? (
       <p>We can't find this contacts in your book!</p>
     ) : (
       <StyledList>
         {filteredContacts.map(contact => (
-          <StyledLI key={contact.id}>
-            <span>{contact.name}: {contact.number}{' '}</span>
-            <Button type="submit"
-                    onClick={() => dispatch(openModal(contact.id))}
-                    btnText='Edit'/>
-            <Button type="button"
-                    onClick={() => dispatch(contactsOperations.deleteContact(contact.id))}
-                    btnText='Delete'/>
+          <StyledLI key={contact.id} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'space-between'}}>
+            <span>
+              {contact.name}: {contact.number}{' '}
+            </span>
+            <div>
+              <Button type="submit"
+                      onClick={() => editModal(contact.id)}
+                      btnText='Edit'
+                      style={{ marginRight: '10px', paddingTop: '5px', paddingBottom: '5px' }}/>
+              <Button type="button"
+                      onClick={() => deleteContact(contact.id)}
+                      btnText='Delete'
+                      style={{ paddingTop: '5px', paddingBottom: '5px' }}/>
+            </div>
           </StyledLI>
         ))}
       </StyledList>

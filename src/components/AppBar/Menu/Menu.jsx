@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { authSelectors, authOperations } from 'redux/auth';
+import {StyledButton} from "../../atoms/Button/Button.styled";
 
 const UserMenu = () => {
   const dispatch = useDispatch();
@@ -7,21 +8,22 @@ const UserMenu = () => {
   const allowedEmoji = [...'😊🙃🤪🤓🤯😴💩👻👽🤖👾👐🖖✌️🤟🤘🤙👋🐭🦕🦖🐉'];
 
   return (
-    <div>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
       <span>
         Welcome, {name}{' '}
         <span role="img" aria-label="hello">
           {[...allowedEmoji][Math.floor(Math.random() * allowedEmoji.length)]}
         </span>
       </span>
-      <button
+      <StyledButton
+        style={{ padding: '5px 1.5rem', marginTop: '0', marginLeft: '10px' }}
         type="button"
         onClick={() => {
           dispatch(authOperations.logout());
         }}
       >
         Log out
-      </button>
+      </StyledButton>
     </div>
   );
 };
